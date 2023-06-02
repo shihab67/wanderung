@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "25f8acfc-c80f-4d49-a61b-eeb7456ebfce",
+		"name": "Wanderung",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10879134"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "{email}",
+							"description": "A valid and unique email address is required.",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{password}",
+							"description": "Password should contain at least 6 letters.",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "{password}",
+							"description": "This filed is required to confirm the password.",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://wanderung.test/api/signup",
+					"protocol": "http",
+					"host": [
+						"wanderung",
+						"test"
+					],
+					"path": [
+						"api",
+						"signup"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				},
+				"description": "#### This API is used to create a new user.\n\nRequired fields:\n\n- email (An unique email)\n- password (must contain at least 6 letters)\n- password_confirmation (must match the given password)\n    \n\nIf any of the required field is missing then it will return an error like this:\n\n``` json\n{\n    \"errors\": [\n        \"The email field is required.\",\n        \"The password field is required.\"\n    ]\n}\n\n```\n\nIf all the required field is given then it will create the user and return a token like this:\n\n``` json\n{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiODIzMGU3YzAzZWZkOTA1OThkMDgwOWIwNjc2NmE5NzY0N2Y1NzMwYWUzMTkxOGUxMDM2NTYxZDFjMGNkYjRmMTg3YjI4MmJhMzk1YWE3ZjEiLCJpYXQiOjE2ODU3MTg3NDUuOTk3MDU2LCJuYmYiOjE2ODU3MTg3NDUuOTk3MDYsImV4cCI6MTcxNzM0MTE0NS45ODU5MjgsInN1YiI6IjEwIiwic2NvcGVzIjpbXX0.dMSS9Mvd4N7ahpXqbBd7cOhYeuiig_O4IRpYRX6a3LFLnF2QDg1vIzgMXK1ROZ9F8XkkxjnPNrrT6Z-rOQxsXHD1tek9Mtu3rqmwQ5G9gxJMviaceIGdTPk8IE7HJR3uXa2Y2E6Tneu6o9aLllBC5q73wrTJrMQCR14aBN9-EVi_VMJ8oBu0kP3pO7tt7JxeyYrMl8TuAZcDyd7Df-0GYLEGGA91fLeBcdZu6xiS7j7E2LOP0RHLXErTIRrlZdRTkT7IzzLjkNCaFCXfnE-qo_zrnSkZK0haCtGkk8gVQsjEMWPVKdwMMe6Lt92zLhrVCf0S2UcrQBLXF9lpceUdjM1GBxIeiMoqCZn2pKHX_oXSOQSRrJqLbzGoiADoY5wJSVHdsD-WWIiI8qB2oSF-wnRPwQJA1aaV74Gv_QMECovnEnZ5IRsrVZq2vDfQnQZ66XkgwFUeHgP07I6UJ6dvffHY4tAOJrN9MkXzmCuSaGrAlkUXnNHlNPJogkzdcR5Ud3S2eJlrWMbfUs_SZCK8LisLKaozw-xwmGa6IHZThuKdLpQ0zfB2zYEUtbwk156qZh0Bu3ys05KMc-IXrobKT5fqTSdB1rRN9Vk73fmHkHBQafi4RkJAmLw9kWgZjGZepX6stY8skwxbXqnc4bNW8lVzm30zT-544RfWhQ1zdNM\"\n}\n\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "{email}",
+							"description": "A valid emai address that is used during registration process.",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{password}",
+							"description": "Password that was used during the registration process.",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://wanderung.test/api/login",
+					"protocol": "http",
+					"host": [
+						"wanderung",
+						"test"
+					],
+					"path": [
+						"api",
+						"login"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "#### This API is used to login.\n\nRequired fields:\n\n- email(required)\n- password(required)\n    \n\nIf there's a missing field then it will return an error like this:\n\n``` json\n{\n    \"errors\": [\n        \"The email field is required.\",\n        \"The password field is required.\"\n    ]\n}\n\n```\n\nIf the user doesn't exist then it will return:\n\n``` json\n{\n    \"message\": \"User does not exist\"\n}\n\n```\n\nAnd finally if the user exists then it will return a token. This token will be required to access the protected routes such as places API. So this token must be included in the header.\n\nThe token looks something like this:\n\n``` json\n{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiODIzMGU3YzAzZWZkOTA1OThkMDgwOWIwNjc2NmE5NzY0N2Y1NzMwYWUzMTkxOGUxMDM2NTYxZDFjMGNkYjRmMTg3YjI4MmJhMzk1YWE3ZjEiLCJpYXQiOjE2ODU3MTg3NDUuOTk3MDU2LCJuYmYiOjE2ODU3MTg3NDUuOTk3MDYsImV4cCI6MTcxNzM0MTE0NS45ODU5MjgsInN1YiI6IjEwIiwic2NvcGVzIjpbXX0.dMSS9Mvd4N7ahpXqbBd7cOhYeuiig_O4IRpYRX6a3LFLnF2QDg1vIzgMXK1ROZ9F8XkkxjnPNrrT6Z-rOQxsXHD1tek9Mtu3rqmwQ5G9gxJMviaceIGdTPk8IE7HJR3uXa2Y2E6Tneu6o9aLllBC5q73wrTJrMQCR14aBN9-EVi_VMJ8oBu0kP3pO7tt7JxeyYrMl8TuAZcDyd7Df-0GYLEGGA91fLeBcdZu6xiS7j7E2LOP0RHLXErTIRrlZdRTkT7IzzLjkNCaFCXfnE-qo_zrnSkZK0haCtGkk8gVQsjEMWPVKdwMMe6Lt92zLhrVCf0S2UcrQBLXF9lpceUdjM1GBxIeiMoqCZn2pKHX_oXSOQSRrJqLbzGoiADoY5wJSVHdsD-WWIiI8qB2oSF-wnRPwQJA1aaV74Gv_QMECovnEnZ5IRsrVZq2vDfQnQZ66XkgwFUeHgP07I6UJ6dvffHY4tAOJrN9MkXzmCuSaGrAlkUXnNHlNPJogkzdcR5Ud3S2eJlrWMbfUs_SZCK8LisLKaozw-xwmGa6IHZThuKdLpQ0zfB2zYEUtbwk156qZh0Bu3ys05KMc-IXrobKT5fqTSdB1rRN9Vk73fmHkHBQafi4RkJAmLw9kWgZjGZepX6stY8skwxbXqnc4bNW8lVzm30zT-544RfWhQ1zdNM\"\n}\n\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "Places",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer token_that_was_received_after_login",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://wanderung.test/api/places?latitude={latitude}&longitude={longitude}&radius={radius}",
+					"protocol": "http",
+					"host": [
+						"wanderung",
+						"test"
+					],
+					"path": [
+						"api",
+						"places"
+					],
+					"query": [
+						{
+							"key": "latitude",
+							"value": "{latitude}",
+							"description": "This field is required which contains the value of latitude."
+						},
+						{
+							"key": "longitude",
+							"value": "{longitude}",
+							"description": "This field is required which contains the value of longitude."
+						},
+						{
+							"key": "radius",
+							"value": "{radius}",
+							"description": "Optional. If not specified then the default value will be set to 5000."
+						}
+					]
+				},
+				"description": "#### This API is used to get nearby places based on the given coordinates(latitude, longitude).\n\nRequired fields:\n\n- latitude(required)\n- longitude(required)\n- radius (optional. Default is 5000)\n    \n\nIf any of the field is missing then it will return the following error:\n\n``` json\n{\n    \"errors\": [\n        \"The latitude field is required.\",\n        \"The longitude field is required.\"\n    ]\n}\n\n```\n\nIf all the required fields are given then it will return a **JSON** which will contain the nearby places.\n\n**This API is not tested since I don't have the GOOGLE_API_KEY as it requires credit card information. But I'm pretty sure if a valid GOOGLE_API_KEY is provided then the code will work.**"
+			},
+			"response": []
+		}
+	]
+}
