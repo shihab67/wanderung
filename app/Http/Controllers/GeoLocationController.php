@@ -13,6 +13,7 @@ class GeoLocationController extends Controller
             'latitude'  => 'required',
             'longitude' => 'required',
         ]);
+        
         if ($validator->fails()) {
             return response(['errors' => $validator->errors()->all()], 422);
         }
