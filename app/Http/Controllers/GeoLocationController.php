@@ -10,7 +10,7 @@ class GeoLocationController extends Controller
     public function places(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'latitude' => 'required',
+            'latitude'  => 'required',
             'longitude' => 'required',
         ]);
         if ($validator->fails()) {
