@@ -11,7 +11,7 @@
 -   Next, you should run the `php artisan passport:install` command. This command will create the encryption keys needed to generate secure access tokens. In addition, the command will create "personal access" and "password grant" clients which will be used to generate access tokens.
 -   Finally run `php artisan serve` to run the project in your localhost.
 
-## GOOGLE MAPS API KEY
+## Google Maps API Key
 
 ### In your .env file you need to put your **GOOGLE_MAPS_API_KEY**. This key will be needed to fetch the nearby places using [http://wanderung.test/api/places?latitude={latitude}&longitude={longitude}&radius={radius}](http://wanderung.test/api/places?latitude={latitude}&longitude={longitude}&radius={radius}) API.
 
